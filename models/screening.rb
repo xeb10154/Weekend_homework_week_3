@@ -30,12 +30,13 @@ class Screening
 
   def self.all()
     sql = "SELECT * FROM screenings"
-    all_screening = SqlRunner.run(sql)
-    return all_screening.map {|screening| Screening.new(screening)}
+    all_screenings = SqlRunner.run(sql)
+    return all_screenings.map {|screening| Screening.new(screening)}
   end
 
   def update()
-    sql = "UPDATE screenings SET film_id = $1, empty_seats = $2, start_time = $3 WHERE id = $4"
+    sql = "UPDATE screenings SET film_id = $1, empty_seats = $2, start_time = $3
+    WHERE id = $4"
 
     values = [@film_id, @empty_seats, @start_time, @id]
     SqlRunner.run(sql, values).first
@@ -43,7 +44,22 @@ class Screening
 
   def self.delete_all()
     sql = "DELETE FROM screenings"
-    all_customers = SqlRunner.run(sql)
+    all_screenings = SqlRunner.run(sql)
   end
 
+  def self.allFilmTimes()
+    # sql = "SELECT * FROM screenings
+    # INNER JOIN tickets
+    # ON screenings.id = tickets.screening_id
+    # INNER JOIN films
+    # ON tickets.film_id = films.id"
+
+    sql = "SELECT screenings.start_time, films.title
+    FROM screenings INNER JOIN films
+    ON screenings.film_id = films.id"
+
+    all_screenings = SqlRunner.run(sql)
+    all_screenings.map {|screening| screening}
+    # binding.pry
+  end
 end

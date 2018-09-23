@@ -29,7 +29,6 @@ customer3 = Customer.new({
 customer3.save()
 
 
-
 # ---Film objects---
 film1 = Film.new({
 "title" => "The Imitation Game",
@@ -65,7 +64,7 @@ screening2 = Screening.new({
 screening2.save()
 
 screening3 = Screening.new({
-"start_time" => "15:30",
+"start_time" => "20:00",
 "empty_seats" => 15,
 "film_id" => film3.id
 })
@@ -141,6 +140,10 @@ customer2.countTickets()
 
 # Count number of customers going to see a certain film
 film3.numberOfCustomers()
+
+# Show all film screenings with corresponding start_times
+Screening.allFilmTimes() # Returns an array of hashes
+
 
 
 
