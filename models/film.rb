@@ -57,4 +57,23 @@ class Film
     custs.map {|cust| Customer.new(cust)}
   end
 
+  def popularTime()
+    sql = "SELECT screenings.start_time,
+    tickets.screening_id,
+    films.id,
+    films.title
+    FROM screenings
+    INNER JOIN tickets
+    ON tickets.screening_id = screenings.id
+    INNER JOIN films
+    ON tickets.film_id = films.id WHERE films.id = $1"
+# tickets.film_id,
+    values = [@id]
+    film_hash = SqlRunner.run(sql,values)
+    filmArray = film_hash.map {|film| film}
+    #Enumerator counts element occurences.
+    mostPopular = filmArray.max_by {|screening| screening[:start_time]}
+    binding.pry
+  end
+
 end
