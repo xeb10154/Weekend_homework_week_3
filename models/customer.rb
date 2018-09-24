@@ -45,7 +45,7 @@ class Customer
     SqlRunner.run(sql)
   end
 
-# Find which films customers has seen
+  # Find which films customers has seen
 
   def whichFilms
     sql = "SELECT tickets.*, films.*
@@ -58,9 +58,21 @@ class Customer
     watched.map {|film| Film.new(film)}
   end
 
-  def purchase(filmPrice)
-    if @funds >= filmPrice
-      @funds -= filmPrice
+  def purchase(ticket)
+    if @funds >= ticket.filmPrice
+
+      # sql = "SELECT screenings.empty_seats FROM screenings
+      # WHERE id = $1"
+      #
+      # values = [ticket.screening_id]
+      # seats_hash = SqlRunner.run(sql, values)
+      # arraySeats = seats_hash.map {|seats| seats }.first
+      # freeSeats = arraySeats[:empty_seats]
+      # binding.pry
+      # if freeSeats > 0
+        @funds -= ticket.filmPrice
+      #   freeSeats -= 1
+      # end
     end
   end
 

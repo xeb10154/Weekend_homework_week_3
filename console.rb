@@ -42,7 +42,7 @@ screening5.save()
 ticket1 = Ticket.new({"film_id" => film1.id,"customer_id" => customer1.id,"screening_id" => screening1.id})
 ticket1.save()
 
-# Customer2 bought both ticket2 and ticket3 for different films
+#---Customer2 bought both ticket2 and ticket3 for different films
 ticket2 = Ticket.new({"film_id" => film2.id,"customer_id" => customer2.id,"screening_id" => screening2.id})
 ticket2.save()
 ticket3 = Ticket.new({"film_id" => film3.id,"customer_id" => customer2.id,"screening_id" => screening3.id})
@@ -84,10 +84,10 @@ customer2.whichFilms()
 film3.whichCustomers()
 
 # Test deduct price of ticket sold
-customer1.purchase(ticket1.filmPrice)
+customer1.purchase(ticket1)
 
 # Test deduct price with insuffient funds (no amount deducted)
-customer1.purchase(ticket3.filmPrice)
+customer1.purchase(ticket3)
 
 # Count number of tickets a customer bought
 customer2.countTickets()
@@ -101,6 +101,8 @@ Screening.allFilmTimes() # Returns an array of hashes
 # Find most popular screening time for any given film
 film3.popularTime() # Result will return screening3 hash
 
+# Limit the available tickets for screening
+# Cant get this working! See Purchase function in film Class.
 
 #---testing with Pry---
 binding.pry

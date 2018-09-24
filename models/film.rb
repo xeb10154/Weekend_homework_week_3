@@ -72,8 +72,8 @@ class Film
     film_hash = SqlRunner.run(sql,values)
     filmArray = film_hash.map {|film| film}
     #Enumerator counts element occurences.
-    mostPopular = filmArray.max_by {|screening| screening[:start_time]}
-    binding.pry
+    return mostPopular = filmArray.max_by {|screening| screening[:start_time]}
+    # binding.pry
   end
 
 end
